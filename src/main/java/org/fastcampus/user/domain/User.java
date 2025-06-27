@@ -46,12 +46,23 @@ public class User {
 
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
         User user = (User) object;
         return java.util.Objects.equals(id, user.id);
     }
 
     public int hashCode() {
-        return java.util.Objects.hash(super.hashCode(), id);
+        return java.util.Objects.hash(id);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int getFollowingCount() {
+        return followingCounter.getCount();
+    }
+
+    public int getFollowerCount() {
+        return followerCounter.getCount();
     }
 }
