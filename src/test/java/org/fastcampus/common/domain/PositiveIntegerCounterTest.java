@@ -14,4 +14,30 @@ public class PositiveIntegerCounterTest {
         //then
         assertEquals(1, counter.getCount());
     }
+
+    @Test
+    void givenCretedAndIncreased_whenDecrease_thenCountIsZero(){
+
+        //given
+        PositiveIntegerCounter counter = new PositiveIntegerCounter();
+        counter.increase();
+
+        //when
+        counter.decrease();
+
+        //then
+        assertEquals(0, counter.getCount());
+    }
+
+    @Test
+    void givenCreted_whenDecrease_thenCountIsZero(){
+        //given
+        PositiveIntegerCounter counter = new PositiveIntegerCounter();
+
+        //when
+        counter.decrease();
+
+        //then
+        assertEquals(0, counter.getCount());
+    }
 }
