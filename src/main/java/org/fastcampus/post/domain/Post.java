@@ -46,10 +46,30 @@ public class Post{
     }
 
     public void updatePost(User user, String updateContent, PostPublicationState state){
-        if(this.author.equals(user)){
+        if(!this.author.equals(user)){
             throw new IllegalArgumentException();
         }
         this.state = state;
         this.content.updateContent(updateContent);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public String getContent() {
+        return content.getContentText();
+    }
+
+    public int getLikeCount() {
+        return likeCount.getCount();
+    }
+
+    public PostPublicationState getState() {
+        return state;
     }
 }
