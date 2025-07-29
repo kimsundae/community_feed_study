@@ -1,13 +1,25 @@
 package org.fastcampus.user.domain;
 
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.fastcampus.common.domain.PositiveIntegerCounter;
-
+@Builder
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-
-    private final Long id;
-    private final UserInfo info;
-    private final PositiveIntegerCounter followingCounter;
-    private final PositiveIntegerCounter followerCounter;
+    @Id
+    private Long id;
+    @Embedded
+    private UserInfo info;
+    @Embedded
+    private PositiveIntegerCounter followingCounter;
+    @Embedded
+    private PositiveIntegerCounter followerCounter;
 
     public User(Long id, UserInfo userInfo) {
         if(userInfo == null){
@@ -76,5 +88,11 @@ public class User {
 
     public PositiveIntegerCounter getFollowerCounter() {
         return followerCounter;
+    }
+    public String getProfileImage() {
+        return info.getProfileImageUrl();
+    }
+    public String getName(){
+        return info.getName();
     }
 }

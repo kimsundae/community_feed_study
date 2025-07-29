@@ -1,5 +1,10 @@
 package org.fastcampus.user.domain;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@Builder
 public class UserInfo {
 
     private final String name;
@@ -12,9 +17,5 @@ public class UserInfo {
 
         this.name = name;
         this.profileImageUrl = profileImageUrl;
-    }
-
-    public String getName() {
-        return name;
     }
 }
