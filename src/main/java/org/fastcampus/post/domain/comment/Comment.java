@@ -1,11 +1,16 @@
 package org.fastcampus.post.domain.comment;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import org.fastcampus.common.domain.PositiveIntegerCounter;
 import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.content.CommentContent;
 import org.fastcampus.post.domain.content.Content;
 import org.fastcampus.user.domain.User;
-
+@Getter
+@Builder
+@AllArgsConstructor
 public class Comment {
 
     private final Long id;
@@ -52,5 +57,12 @@ public class Comment {
             throw new IllegalArgumentException();
         }
         this.content.updateContent(updateContent);
+    }
+
+    public String getContent(){
+        return this.content.getContentText();
+    }
+    public int getLikeCount(){
+        return this.likeCount.getCount();
     }
 }

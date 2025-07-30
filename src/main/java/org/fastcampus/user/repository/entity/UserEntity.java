@@ -9,6 +9,7 @@ import org.fastcampus.common.repository.entity.TimeBaseEntity;
 import org.fastcampus.user.domain.User;
 import org.fastcampus.user.domain.UserInfo;
 
+
 @Entity
 @Table(name = "community_user")
 @NoArgsConstructor

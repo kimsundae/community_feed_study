@@ -1,10 +1,14 @@
 package org.fastcampus.post.domain;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import org.fastcampus.common.domain.PositiveIntegerCounter;
 import org.fastcampus.post.domain.content.Content;
 import org.fastcampus.post.domain.content.PostContent;
 import org.fastcampus.post.domain.content.PostPublicationState;
 import org.fastcampus.user.domain.User;
 
+@Builder
+@AllArgsConstructor
 public class Post{
 
     private final Long id;

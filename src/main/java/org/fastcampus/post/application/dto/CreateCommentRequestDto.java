@@ -1,4 +1,4 @@
-package org.fastcampus.post.domain.application.dto;
+package org.fastcampus.post.application.dto;
 
 public record CreateCommentRequestDto(Long postId, Long userId, String content) {
 }

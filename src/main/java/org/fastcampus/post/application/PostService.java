@@ -1,10 +1,10 @@
-package org.fastcampus.post.domain.application;
+package org.fastcampus.post.application;
 
 import org.fastcampus.post.domain.Post;
-import org.fastcampus.post.domain.application.dto.CreatePostRequestDto;
-import org.fastcampus.post.domain.application.dto.LikeRequestDto;
-import org.fastcampus.post.domain.application.interfaces.LikeRepository;
-import org.fastcampus.post.domain.application.interfaces.PostRepository;
+import org.fastcampus.post.application.dto.CreatePostRequestDto;
+import org.fastcampus.post.application.dto.LikeRequestDto;
+import org.fastcampus.post.application.interfaces.LikeRepository;
+import org.fastcampus.post.application.interfaces.PostRepository;
 import org.fastcampus.user.application.UserService;
 import org.fastcampus.user.domain.User;
 

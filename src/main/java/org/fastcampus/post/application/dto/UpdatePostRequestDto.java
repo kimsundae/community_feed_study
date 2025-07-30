@@ -1,4 +1,4 @@
-package org.fastcampus.post.domain.application.dto;
+package org.fastcampus.post.application.dto;
 
 import org.fastcampus.post.domain.content.PostPublicationState;
 
