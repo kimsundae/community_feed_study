@@ -1,24 +1,21 @@
 package org.fastcampus.user.domain;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import org.fastcampus.common.domain.PositiveIntegerCounter;
+
+@Getter
 @Builder
-@Entity
-@NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    @Id
+
     private Long id;
-    @Embedded
+
     private UserInfo info;
-    @Embedded
+
     private PositiveIntegerCounter followingCounter;
-    @Embedded
+
     private PositiveIntegerCounter followerCounter;
 
     public User(Long id, UserInfo userInfo) {
