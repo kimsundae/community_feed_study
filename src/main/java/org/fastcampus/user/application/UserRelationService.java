@@ -30,10 +30,6 @@ public class UserRelationService {
         User user = userService.getUser(dto.userId());
         User targetUser = userService.getUser(dto.targetUserId());
 
-        if(userRelationRepository.isAlreadyFollow(user,targetUser)){
-            throw new IllegalArgumentException();
-        }
-
         user.unFollow(targetUser);
         userRelationRepository.delete(user,targetUser);
     }

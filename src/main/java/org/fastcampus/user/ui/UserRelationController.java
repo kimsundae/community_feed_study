@@ -14,11 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserRelationController {
 
-    private UserRelationService userRelationService;
+    private final UserRelationService userRelationService;
 
     @PostMapping("/follow")
     public Response<Void> followUser(@RequestBody FollowUserRequestDto dto){
         userRelationService.follow(dto);
+        return Response.ok(null);
+    }
+
+    @PostMapping("/unfollow")
+    public Response<Void> unfollowUser(@RequestBody FollowUserRequestDto dto){
+        userRelationService.unFollow(dto);
         return Response.ok(null);
     }
 }

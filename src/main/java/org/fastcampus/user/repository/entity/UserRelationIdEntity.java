@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRelationIdEntity {
-    private Long follwingUserId;
+    private Long followingUserId;
     private Long followerUserId;
 }
