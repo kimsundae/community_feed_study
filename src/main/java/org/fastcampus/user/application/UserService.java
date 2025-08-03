@@ -6,8 +6,6 @@ import org.fastcampus.user.domain.User;
 import org.fastcampus.user.domain.UserInfo;
 import org.springframework.stereotype.Service;
 
-import java.util.IllformedLocaleException;
-
 @Service
 public class UserService {
     private final UserRepository userRepository;
