@@ -6,13 +6,10 @@ import org.fastcampus.post.application.PostService;
 import org.fastcampus.post.application.dto.CreatePostRequestDto;
 import org.fastcampus.post.application.dto.LikeRequestDto;
 import org.fastcampus.post.domain.Post;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/post")
 @RequiredArgsConstructor
 public class PostController {
 

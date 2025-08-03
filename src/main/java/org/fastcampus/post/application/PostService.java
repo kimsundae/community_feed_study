@@ -37,7 +37,7 @@ public class PostService {
         User user = userService.getUser(dto.userId());
 
         post.updatePost(user, dto.content(), dto.state());
-        return  postRepository.save(post);
+        return postRepository.save(post);
     }
 
     public void likePost(LikeRequestDto dto){
