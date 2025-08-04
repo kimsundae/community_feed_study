@@ -8,6 +8,7 @@ import org.fastcampus.post.application.interfaces.PostRepository;
 import org.fastcampus.user.application.UserService;
 import org.fastcampus.user.domain.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PostService {
@@ -40,6 +41,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    @Transactional
     public void likePost(LikeRequestDto dto){
         Post post = getPost(dto.targetId());
         User user = userService.getUser(dto.userId());
