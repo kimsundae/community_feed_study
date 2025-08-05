@@ -6,16 +6,17 @@ import org.fastcampus.post.domain.comment.Comment;
 import org.fastcampus.post.repository.entity.comment.CommentEntity;
 import org.fastcampus.post.repository.jpa.JpaCommentRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class CommentRepositoryImpl implements CommentRepository {
 
-    private JpaCommentRepository jpaCommentRepository;
+    private final JpaCommentRepository jpaCommentRepository;
 
     @Override
+    @Transactional
     public Comment save(Comment comment) {
         CommentEntity commentEntity = new CommentEntity(comment);
         if(comment.getId() != null) {

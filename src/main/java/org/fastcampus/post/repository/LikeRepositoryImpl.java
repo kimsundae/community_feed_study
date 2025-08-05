@@ -50,7 +50,8 @@ public class LikeRepositoryImpl implements LikeRepository {
 
     @Override
     public boolean checkLike(Comment comment, User user) {
-        return false;
+        LikeEntity likeEntity = new LikeEntity(comment, user);
+        return jpaLikeRepository.existsById(likeEntity.getId());
     }
 
     @Override

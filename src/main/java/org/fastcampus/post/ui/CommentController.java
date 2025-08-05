@@ -6,9 +6,7 @@ import org.fastcampus.post.application.CommentService;
 import org.fastcampus.post.application.dto.CreateCommentRequestDto;
 import org.fastcampus.post.application.dto.LikeRequestDto;
 import org.fastcampus.post.application.dto.UpdateCommentRequestDto;
-import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.comment.Comment;
-import org.fastcampus.user.domain.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,25 +28,15 @@ public class CommentController {
         return Response.ok(comment.getId());
     }
 
-    public void likeComment(LikeRequestDto dto){
-        Comment comment = getComment(dto.targetId());
-        User user = userService.getUser(dto.userId());
-
-        if(likeRepository.checkLike(comment, user)){
-            return;
-        }
-
-        comment.like(user);
-        likeRepository.like(comment, user);
+    @PostMapping("/like")
+    public Response<Void> likeComment(@RequestBody LikeRequestDto dto){
+        commentService.likeComment(dto);
+        return Response.ok(null);
     }
 
-    public void unlikeComment(LikeRequestDto dto){
-        Comment comment = getComment(dto.targetId());
-        User user = userService.getUser(dto.userId());
-
-        if(likeRepository.checkLike(comment, user)){
-            comment.unLike();
-            likeRepository.unlike(comment, user);
-        }
+    @PostMapping("/unlike")
+    public Response<Void> unlikeComment(@RequestBody LikeRequestDto dto){
+        commentService.unlikeComment(dto);
+        return Response.ok(null);
     }
 }

@@ -53,7 +53,7 @@ public class Comment {
     }
 
     public void updateComment(User user, String updateContent){
-        if(this.author.equals(user)){
+        if(!this.author.equals(user)){
             throw new IllegalArgumentException();
         }
         this.content.updateContent(updateContent);
