@@ -41,7 +41,7 @@ public class CommentService {
         Comment comment = getComment(commentId);
         User user = userService.getUser(dto.userId());
 
-        comment.updateComment(user, dto.contnent());
+        comment.updateComment(user, dto.content());
         return commentRepository.save(comment);
     }
 

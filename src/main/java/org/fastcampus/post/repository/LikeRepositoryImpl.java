@@ -34,6 +34,7 @@ public class LikeRepositoryImpl implements LikeRepository {
     }
 
     @Override
+    @Transactional
     public void like(Comment comment, User user) {
         LikeEntity likeEntity = new LikeEntity(comment, user);
         entityManager.persist(likeEntity);
