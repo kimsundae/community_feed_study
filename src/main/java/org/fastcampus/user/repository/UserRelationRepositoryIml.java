@@ -1,6 +1,7 @@
 package org.fastcampus.user.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.fastcampus.post.repository.entity.post_queue.UserPostQueueCommandRepository;
 import org.fastcampus.user.application.interfaces.UserRelationRepository;
 import org.fastcampus.user.domain.User;
 import org.fastcampus.user.repository.entity.UserEntity;
@@ -19,6 +20,7 @@ public class UserRelationRepositoryIml implements UserRelationRepository {
 
     private final JpaUserRelationRepository jpaUserRelationRepository;
     private final JpaUserRepository jpaUserRepository;
+    private final UserPostQueueCommandRepository userPostQueueCommandRepository;
 
     @Override
     public boolean isAlreadyFollow(User user, User targetUser) {
@@ -32,6 +34,7 @@ public class UserRelationRepositoryIml implements UserRelationRepository {
         UserRelationEntity entity = new UserRelationEntity(user.getId(), targetUser.getId());
         jpaUserRelationRepository.save(entity);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        userPostQueueCommandRepository.saveFollowPost(user.getId(), targetUser.getId());
     }
 
     @Override
@@ -40,5 +43,6 @@ public class UserRelationRepositoryIml implements UserRelationRepository {
         UserRelationIdEntity id = new UserRelationIdEntity(user.getId(), targetUser.getId());
         jpaUserRelationRepository.deleteById(id);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        userPostQueueCommandRepository.deleteFollowPost(user.getId(), targetUser.getId());
     }
 }

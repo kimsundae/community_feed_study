@@ -25,10 +25,9 @@ public class UserPostQueueEntity {
     private Long postId;
     private Long authorId;
 
-    public UserPostQueueEntity(User user, Post post){
-        User author = post.getAuthor();
-        this.userId = user.getId();
-        this.postId = post.getId();
-        this.authorId = author.getId();
+    public UserPostQueueEntity(Long userId, Long postId, Long authorId){
+        this.userId = userId;
+        this.postId = postId;
+        this.authorId = authorId;
     }
 }
