@@ -29,7 +29,7 @@ public class PostService {
 
     public Post createPost(CreatePostRequestDto dto){
         User author = userService.getUser(dto.userId());
-        Post post = Post.createPost(author.getId(), author, dto.content(), dto.state());
+        Post post = Post.createPost(null, author, dto.content(), dto.state());
         return postRepository.save(post);
     }
 
