@@ -1,5 +1,7 @@
 package org.fastcampus.acceptance.utils;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.fastcampus.user.application.dto.CreateuserRequestDto;
 import org.fastcampus.user.application.dto.FollowUserRequestDto;
 import org.springframework.stereotype.Component;
@@ -9,6 +11,9 @@ import static org.fastcampus.acceptance.steps.UserAcceptanceSteps.followUser;
 @Component
 public class DataLoader {
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     public void loadData(){
         CreateuserRequestDto dto = new CreateuserRequestDto("test user", "");
         createUser(dto);
@@ -17,5 +22,12 @@ public class DataLoader {
 
         followUser(new FollowUserRequestDto(1L, 2L));
         followUser(new FollowUserRequestDto(1L, 3L));
+    }
+
+    public String getEmailToken(String email){
+        return entityManager.createNativeQuery("SELECT token FROM community_email_verification WHERE email = ?", String.class)
+                .setParameter(1, email)
+                .getSingleResult()
+                .toString();
     }
 }
