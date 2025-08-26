@@ -43,4 +43,47 @@ public class SignupAcceptanceTest extends AcceptanceTestTemplate {
 //        assertNull(token);
         assertEquals(400, code);
     }
+
+    @Test
+    void givenSendEmail_whenVerifyEmail_thenEmailVerified(){
+        SignupAcceptanceSteps.requestSendEmail(new SendEmailRequestDto(email));
+
+        String token = getEmailToken(email);
+        Integer code = SignupAcceptanceSteps.requestVerifyEmail(email, token);
+
+        boolean isEmailVerified = isEmailVerified(email);
+        assertEquals(0, code);
+        assertTrue(isEmailVerified);
+    }
+
+    @Test
+    void givenSendEmail_whenVerifyEmailWithWrongToken_thenEmailNotVerified(){
+        SignupAcceptanceSteps.requestSendEmail(new SendEmailRequestDto(email));
+        Integer code = SignupAcceptanceSteps.requestVerifyEmail(email, "wrong token");
+
+        boolean isEmailVerified = isEmailVerified(email);
+        assertEquals(400, code);
+        assertFalse(isEmailVerified);
+    }
+
+    @Test
+    void givenSendEmailVerified_whenVerifyAgain_thenThrowError(){
+        SignupAcceptanceSteps.requestSendEmail(new SendEmailRequestDto(email));
+
+        String token = getEmailToken(email);
+        SignupAcceptanceSteps.requestVerifyEmail(email, token);
+        Integer code = SignupAcceptanceSteps.requestVerifyEmail(email, token);
+
+        assertEquals(400, code);
+    }
+
+    @Test
+    void givenSendEmail_whenVerifyEmailWithWrongEmail_thenThrowError(){
+        SignupAcceptanceSteps.requestSendEmail(new SendEmailRequestDto(email));
+
+        String token = getEmailToken(email);
+        Integer code = SignupAcceptanceSteps.requestVerifyEmail("wrong email", token);
+
+        assertEquals(400, code);
+    }
 }
