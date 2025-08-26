@@ -2,6 +2,7 @@ package org.fastcampus.acceptance.auth;
 
 import org.fastcampus.acceptance.steps.SignupAcceptanceSteps;
 import org.fastcampus.acceptance.utils.AcceptanceTestTemplate;
+import org.fastcampus.auth.application.dto.CreateUserAuthRequestDto;
 import org.fastcampus.auth.application.dto.SendEmailRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -86,4 +87,30 @@ public class SignupAcceptanceTest extends AcceptanceTestTemplate {
 
         assertEquals(400, code);
     }
+
+    @Test
+    void givenUnverifiedEmail_whenRegister_thenUserRegistered(){
+        SignupAcceptanceSteps.requestSendEmail(new SendEmailRequestDto(email));
+        String token = getEmailToken(email);
+        SignupAcceptanceSteps.requestVerifyEmail(email, token);
+
+        CreateUserAuthRequestDto dto = new CreateUserAuthRequestDto(email, "password", "USER", "name", "profileImageUrl");
+        Integer code = SignupAcceptanceSteps.registerUser(dto);
+
+        assertEquals(0, code);
+        Long userId = getUserId(email);
+        assertEquals(1L, userId);
+    }
+
+    @Test
+    void givenUnverifiedEmail_whenRegister_thenThrowError(){
+        SignupAcceptanceSteps.requestSendEmail(new SendEmailRequestDto(email));
+
+        CreateUserAuthRequestDto dto = new CreateUserAuthRequestDto(email, "password", "USER", "name", "profileImageUrl");
+        Integer code = SignupAcceptanceSteps.registerUser(dto);
+
+        assertEquals(400, code);
+    }
+
+
 }
