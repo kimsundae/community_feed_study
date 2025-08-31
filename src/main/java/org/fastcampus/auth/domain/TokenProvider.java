@@ -3,17 +3,19 @@ package org.fastcampus.auth.domain;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 
+@Component
 public class TokenProvider {
 
     private final SecretKey key;
     private static final long TOKEN_VALID_TIME = 1000L * 60 * 60; // 1 hour
 
-    public TokenProvider(String secretKey){
+    public TokenProvider(@Value("${secret-key}") String secretKey){
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
