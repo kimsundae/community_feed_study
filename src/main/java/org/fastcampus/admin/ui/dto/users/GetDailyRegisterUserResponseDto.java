@@ -1,4 +1,4 @@
-package org.fastcampus.admin.ui.dto;
+package org.fastcampus.admin.ui.dto.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
