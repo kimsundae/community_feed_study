@@ -15,7 +15,13 @@ public class IdempotencyAspect {
     private final HttpServletRequest request;
 
     @Around("@annotation(Idempotent)")
-    public Object checkIdempotency(ProceedingJoinPoint joinPoint){
+    public Object checkIdempotency(ProceedingJoinPoint joinPoint) throws Throwable {
+        String idempotencyKey = request.getHeader("Idempotency-key");
+        if(idempotencyKey == null) {
+            return joinPoint.proceed();
+        }
 
+        Object result = joinPoint.proceed();
+        return result;
     }
 }
