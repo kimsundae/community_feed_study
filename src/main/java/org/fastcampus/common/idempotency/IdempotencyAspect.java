@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.fastcampus.common.ui.Response;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -21,7 +22,17 @@ public class IdempotencyAspect {
             return joinPoint.proceed();
         }
 
+        Idempotency idempotency = idempotencyRepository.getByKey(idempotencyKey);
+
+        if(idempotency != null) {
+            return idempotency.getResponse();
+        }
+
         Object result = joinPoint.proceed();
+
+        Idempotency newIdempotency = new Idempotency(idempotencyKey, (Response<?>) result);
+        idempotencyRepository.save(newIdempotency);
+
         return result;
     }
 }
